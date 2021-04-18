@@ -1,0 +1,184 @@
+﻿@model BusinessObject.UserProfil
+
+@{
+     ViewBag.Title = "Profile";
+}
+
+
+@using (Html.BeginForm())
+{
+     @Html.AntiForgeryToken()
+     <!DOCTYPE html>
+     <head>
+          <title>Bootstrap Example</title>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+          <link href="~/Content/Profile/bootstrap.min.css" rel="stylesheet" />
+          <link rel="stylesheet" type="text/css" href="~/Content/css/style-profile.css">
+
+     </head>
+     <body>
+          <div class="wrapper">
+               <div id="header">
+                    <div class="logo">BOOKShop</div>
+                    <div class="menubar"><a href="/Home/Index">Home</a></div>
+                    <div class="menubar"><a href="/Market/Category">Market</a></div>
+                    @if (Session["Username"] == null)
+                    {
+                         <div class="menubar"><a href="/Auth/Login">Login</a></div>
+                    }
+                    else
+                    {
+                         <div class="dropdown">
+                              <div class="menubar user">@Session["Username"].ToString()</div>
+                              <div class="dropdown-content">
+                                   <a href="/User/Profile">Profile</a>
+                                   <a href="/Auth/Logout">Logout</a>
+                              </div>
+                         </div>
+                    }
+               </div>
+
+
+               <div class="container bootstrap snippet">
+                    <div class="row">
+                         <div class="col-sm-12" style="padding-bottom: 25px;">
+                              <h1 style="border-bottom: 1px solid black;">
+                                   @if (Session["Username"] != null)
+                                   {
+                                        @Session["Username"].ToString()
+                                   }
+                              </h1>
+                         </div>
+                         <div class="col-sm-2"></div>
+                    </div>
+                    <div class="row nav-panel">
+                         <div class="col-sm-3">
+                              <!--left col-->
+                              <label for="home">My Profiel</label>
+                              <ul class="list-group nav-list">
+                                   <button class="list-group-item nav-obj" name="button" value="home"><strong>Informatii</strong></button>
+                              </ul>
+                              <label for="security">Settings</label>
+                              <ul class="list-group nav-list">
+                                   <button class="list-group-item nav-obj" name="button" value="general"><strong>General</strong></button>
+                                   <button class="list-group-item nav-obj" name="button" value="security"><strong>Securitate</strong></button>
+                              </ul>
+                              <ul class="list-group nav-list">
+                                   @if (TempData["Check"] == "True")
+                                   {
+                                        <label for="adm">Admin Panel</label>
+                                        <button class="list-group-item nav-obj" name="button" value="adm"><strong style="color: crimson;">ADMIN PANEL</strong></button>
+                                   }
+                              </ul>
+
+                         </div><!--/col-3-->
+                         <div class="col-sm-9">
+                              <form action="/User/Profile" autocomplete="off" method="post"></form>
+                              @if (Request.QueryString["option"] == "home" || Request.QueryString["option"] == null)
+                              {
+                                   <div class="tab-content">
+                                        <h1>Home!</h1>
+
+                                   </div><!--/tab-->
+                              }
+                              @if (Request.QueryString["option"] == "general")
+                              {
+
+                                   <div class="col-xs-6 label-style">
+                                        <label for="first_name">First name</label>
+
+                                        @Html.EditorFor(model => model.First, new { htmlAttributes = new { @name = "first_name", @class = "form-control", @id = "first_name", @placeholder = "Enter your first name" } })
+                                        @Html.ValidationMessageFor(model => model.First, "", new { @class = "danger" })
+                                   </div>
+
+
+                                   <div class="col-xs-6 label-style">
+                                        <label for="last_name">Last name</label>
+
+                                        @Html.EditorFor(model => model.Last, new { htmlAttributes = new { @name = "last_name", @class = "form-control", @id = "last_name", @placeholder = "Enter your last name" } })
+                                        @Html.ValidationMessageFor(model => model.Last, "", new { @class = "danger" })
+                                   </div>
+
+
+                                   <div class="col-xs-6 label-style">
+                                        <label for="mobile">Mobile</label>
+
+                                        @Html.EditorFor(model => model.Telefonul, new { htmlAttributes = new { @name = "mobile", @class = "form-control", @id = "mobile", @placeholder = "Enter your mobile number" } })
+                                        @Html.ValidationMessageFor(model => model.Telefonul, "", new { @class = "danger" })
+                                   </div>
+
+
+                                   <div class="col-xs-6 label-style">
+                                        <label for="location">Location</label>
+
+                                        @Html.EditorFor(model => model.Adresa, new { htmlAttributes = new { @class = "form-control", @id = "location", @placeholder = "Enter your location" } })
+                                        @Html.ValidationMessageFor(model => model.Adresa, "", new { @class = "danger" })
+                                   </div>
+
+                                   <div class="col-xs-12 label-style">
+                                        <br>
+                                        <button class="btn btn-lg btn-success pull-right" type="submit" name="button" value="generalinfo">Save</button>
+                                   </div>
+                                   <label class="pull-right" style="font-size:16px; color: darkred;">@TempData["ErrorGeneral"]</label>
+
+                              }
+                              @if (Request.QueryString["option"] == "security")
+                              {
+                                   <div class="col-xs-6 label-style">
+                                        <label for="email">Email</label>
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @type = "email", @name = "email", @class = "form-control", @id = "email", @placeholder = "Enter your curent email" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "danger" })
+                                   </div>
+                                   <div class="col-xs-6 label-style">
+                                        <label for="email">New Email</label>
+
+                                        @Html.EditorFor(model => model.ReEmail, new { htmlAttributes = new { @type = "email", @name = "email", @class = "form-control", @id = "reemail", @placeholder = "Enter your new email" } })
+                                        @Html.ValidationMessageFor(model => model.ReEmail, "", new { @class = "danger" })
+                                   </div>
+                                   <div class="col-xs-12 label-style">
+                                        <label for="password">Password</label>
+                                        @Html.EditorFor(model => model.PasswordCurentMail, new { htmlAttributes = new { @type = "password", @class = "form-control", @id = "password", @placeholder = "Enter your curent password" } })
+                                        @Html.ValidationMessageFor(model => model.PasswordCurentMail, "", new { @class = "danger" })
+                                   </div>
+                                   <div class="col-xs-12 label-style">
+                                        <br>
+                                        <button class="btn btn-lg btn-success pull-right" type="submit" name="button" value="securitymail">Save</button>
+                                   </div>
+                                   <label class="pull-right" style="font-size:15px; color: darkred;">@TempData["ErrorMail"]</label>
+
+                                   <div class="col-xs-12 label-style">
+                                        <label for="curentpassword">Parola curenta</label>
+                                        @Html.EditorFor(model => model.PasswordCurentPass, new { htmlAttributes = new { @type = "password", @class = "form-control", @id = "password", @placeholder = "Enter your curent password" } })
+                                        @Html.ValidationMessageFor(model => model.PasswordCurentPass, "", new { @class = "danger" })
+                                   </div>
+                                   <div class="col-xs-6 label-style">
+                                        <label for="password">Parola noua</label>
+                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @type = "password", @class = "form-control", @id = "password", @placeholder = "Enter your new password" } })
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "danger" })
+                                   </div>
+                                   <div class="col-xs-6 label-style">
+                                        <label for="password2">Repeta parola noua</label>
+                                        @Html.EditorFor(model => model.RePassword, new { htmlAttributes = new { @type = "password", @class = "form-control", @id = "repassword", @placeholder = "Repeat your new password" } })
+                                        @Html.ValidationMessageFor(model => model.RePassword, "", new { @class = "danger" })
+                                   </div>
+                                   <div class="col-xs-12 label-style">
+                                        <br>
+                                        <button class="btn btn-lg btn-success pull-right" type="submit" name="button" value="securitypass">Save</button>
+                                   </div>
+                                   <label class="pull-right" style="font-size:15px; color: darkred;">@TempData["ErrorPass"]</label>
+                              }
+
+                         </div><!--/col-9-->
+                    </div><!--/row-->
+               </div><!--/container-->
+          </div><!--/wrapper-->
+
+                         <script src="~/Content/Profile/jquery.min.js"></script>
+                         <script src="~/Content/Profile/bootstrap.min.js"></script>
+          </body>
+}
+
+

@@ -1,0 +1,73 @@
+﻿@model BusinessObject.UserRegistration
+
+@{
+     ViewBag.Title = "Register";
+}
+
+
+@using (Html.BeginForm())
+{
+     @Html.AntiForgeryToken()
+     <!DOCTYPE html>
+     <html>
+     <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>BOOKShop</title>
+          <link href="~/Content/css/style.css" rel="stylesheet" />
+          <!-- Font Icon -->
+          <link rel="stylesheet" href="~/Content/Register/fonts/material-icon/css/material-design-iconic-font.min.css">
+          <!-- Main css -->
+          <link rel="stylesheet" href="~/Content/Register/css/style.css">
+     </head>
+     <body>
+
+          <div id="header">
+               <div class="logo">BOOKShop</div>
+               <div class="menubar"><a href="/Home/Index">Home</a></div>
+               <div class="menubar"><a href="/Market/Category">Market</a></div>
+               <div class="menubar"><a href="/Auth/Login">Login</a></div>
+          </div>
+
+          <div class="main">
+
+               <section class="signup">
+                    <div class="container">
+                         <div class="signup-content">
+                              <form method="POST" id="signup-form" class="signup-form">
+                                   <h2 class="form-title">Create account</h2>
+                                   <div class="form-group">
+
+                                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-input", @id = "Txtname", @placeholder = "Username" } })
+                                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "danger" })
+                                   </div>
+                                   <div class="form-group">
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-input", @id = "email", @placeholder = "Your Email" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "danger" })
+
+                                   </div>
+                                   <div class="form-group">
+                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-input", @id = "password", @placeholder = "Password", @type = "password" } })
+                                        <span toggle="#password" class="zmdi zmdi-eye-off field-icon toggle-password"></span>
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "danger" })
+                                   </div>
+                                   <div class="form-group">
+                                        @Html.EditorFor(model => model.RePassword, new { htmlAttributes = new { @class = "form-input", @id = "re_password", @placeholder = "Repeat your password", @type = "password" } })
+                                        @Html.ValidationMessageFor(model => model.RePassword, "", new { @class = "danger" })
+                                   </div>
+                                   <div class="form-group">
+                                        <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up" />
+                                        <label class="danger" style="font-size:20px;">@ViewBag.Notification</label>
+                                   </div>
+                              </form>
+                         </div>
+                    </div>
+               </section>
+
+          </div>
+          <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+          <script src="~/Content/Register/js/main.js"></script>
+          <script src="~/Scripts/bootstrap.min.js"></script>
+     </body>
+</html>
+}

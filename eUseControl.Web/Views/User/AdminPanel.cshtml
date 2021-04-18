@@ -1,0 +1,150 @@
+﻿
+@model BusinessObject.ViewModel
+@{
+     ViewBag.Title = "ADMIN PANEL";
+}
+
+
+@using (Html.BeginForm("AdminPanel", "User", FormMethod.Post, new { enctype = "multipart/form-data" } ))
+{
+     @Html.AntiForgeryToken()
+     <!DOCTYPE html>
+     <head>
+          <title>Bootstrap Example</title>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+          <link href="~/Content/Profile/bootstrap.min.css" rel="stylesheet" />
+          <link rel="stylesheet" type="text/css" href="~/Content/css/style-profile.css">
+
+     </head>
+     <body>
+          <div class="wrapper">
+               <div id="header">
+                    <div class="logo">BOOKShop</div>
+                    <div class="menubar"><a href="/Home/Index">Home</a></div>
+                    <div class="menubar"><a href="/Market/Category">Market</a></div>
+                    @if (Session["Username"] == null)
+                    {
+                         <div class="menubar"><a href="/Auth/Login">Login</a></div>
+                    }
+                    else
+                    {
+                         <div class="dropdown">
+                              <div class="menubar user">@Session["Username"].ToString()</div>
+                              <div class="dropdown-content">
+                                   <a href="/User/Profile">Profile</a>
+                                   <a href="/Auth/Logout">Logout</a>
+                              </div>
+                         </div>
+                    }
+               </div>
+
+
+               <div class="container bootstrap snippet">
+                    <div class="row">
+                         <div class="col-sm-12" style="padding-bottom: 25px;">
+                              <h1 style="border-bottom: 1px solid black;">
+                                   @if (Session["Username"] != null)
+                                   {
+                                        @Session["Username"].ToString()
+                                   }
+                              </h1>
+                         </div>
+                         <div class="col-sm-2"></div>
+                    </div>
+                    <div class="row nav-panel">
+                         <div class="col-sm-3">
+                              <!--left col-->
+                              <ul class="list-group nav-list">
+                                   <form action="/User/AdminPanel" autocomplete="off" method="post"></form>
+                                   <button class="list-group-item nav-obj" type="submit" name="btn" value="addbook"><strong>Adauga Carte</strong></button>
+                                   <button class="list-group-item nav-obj" type="submit" name="btn" value="users"><strong>Users</strong></button>
+                              </ul>
+                         </div><!--/col-3-->
+                         <div class="col-sm-9">
+
+                              @if (Request.QueryString["option"] == "addbook")
+                              {
+                                   <div class="col-xs-6 label-style">
+                                        <label for="book_name">Denumirea cartii</label>
+                                        @Html.EditorFor(model => model.Book.Name, new { htmlAttributes = new { @name = "book_name", @class = "form-control", @id = "book_name", @placeholder = "Introduceti denumirea cartii" } })
+                                   </div>
+                                   <div class="col-xs-6 label-style">
+                                        <label for="autor">Autorul</label>
+                                        @Html.EditorFor(model => model.Book.Autor, new { htmlAttributes = new { @name = "autor", @class = "form-control", @id = "autor", @placeholder = "Introduceti numele autorului" } })
+                                   </div>
+                                   <div class="col-xs-6 label-style">
+                                        <label for="price">Pretul</label>
+                                        @Html.EditorFor(model => model.Book.Price, new { htmlAttributes = new { @name = "price", @class = "form-control", @id = "price", @placeholder = "Introduceti pretul cartii" } })
+                                   </div>
+
+                                   <div class="col-xs-6 label-style">
+                                        <label class="col-xs-12" for="ctg">Categoria:</label>
+                                        <select id="select" name="select">
+                                             @foreach (var ctg in Model.Category.Category)
+                                             {
+                                                  <option value="@ctg">@ctg</option>
+                                             }
+                                        </select>
+                                   </div>
+                                   <div class="col-xs-12 label-style">
+                                        <label for="img">Imaginea</label>
+                                        <input type="file" id="ImageFile" name="ImageFile"/>
+                                   </div>
+
+                                   <div class="col-xs-12 label-style">
+                                        <br>
+                                        <form action="/User/AdminPanel" autocomplete="off" method="post"></form>
+                                        <button class="btn btn-lg btn-success pull-right" type="submit" name="btn" value="post">Post</button>
+                                        <label style="font-size:15px; color: red;">@TempData["Error"]</label>
+                                   </div>
+
+                              }
+
+                              @if (Request.QueryString["option"] == "users")
+                              {
+                                   <table id="users">
+                                        <tr>
+                                             <th>Username</th>
+                                             <th>Parola</th>
+                                             <th>Email</th>
+                                             <th>Numele</th>
+                                             <th>Prenumele</th>
+                                             <th>Adresa</th>
+                                             <th>Telefonul</th>
+                                             <th>Clasa</th>
+
+                                        </tr>
+                                        @foreach (var r in Model.Users)
+                                        {
+                                             <tr>
+                                                  <td>@r.Username</td>
+                                                  <td>@r.Password</td>
+                                                  <td>@r.Email</td>
+                                                  <td>@r.Last</td>
+                                                  <td>@r.First</td>
+                                                  <td>@r.Adresa</td>
+                                                  <td>@r.Telefonul</td>
+                                                  <td>@r.Class</td>
+                                             </tr>
+                                        }
+                                   </table>
+                              }
+
+
+
+
+
+                         </div><!--/col-9-->
+                    </div><!--/row-->
+               </div><!--/container-->
+          </div><!--/wrapper-->
+
+          <script src="~/Content/Profile/jquery.min.js"></script>
+          <script src="~/Content/Profile/bootstrap.min.js"></script>
+     </body>
+}
+
+

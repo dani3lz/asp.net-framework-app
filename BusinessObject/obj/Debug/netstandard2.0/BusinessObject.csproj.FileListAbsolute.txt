@@ -1,0 +1,16 @@
+D:\Files\.NET\eUseControl.Web\BusinessObject\bin\Debug\netstandard2.0\BusinessObject.deps.json
+D:\Files\.NET\eUseControl.Web\BusinessObject\bin\Debug\netstandard2.0\BusinessObject.dll
+D:\Files\.NET\eUseControl.Web\BusinessObject\bin\Debug\netstandard2.0\BusinessObject.pdb
+D:\Files\.NET\eUseControl.Web\BusinessObject\bin\Debug\netstandard2.0\System.ComponentModel.DataAnnotations.dll
+D:\Files\.NET\eUseControl.Web\BusinessObject\bin\Debug\netstandard2.0\System.Configuration.dll
+D:\Files\.NET\eUseControl.Web\BusinessObject\bin\Debug\netstandard2.0\System.Security.dll
+D:\Files\.NET\eUseControl.Web\BusinessObject\bin\Debug\netstandard2.0\System.ComponentModel.DataAnnotations.xml
+D:\Files\.NET\eUseControl.Web\BusinessObject\bin\Debug\netstandard2.0\System.Configuration.xml
+D:\Files\.NET\eUseControl.Web\BusinessObject\bin\Debug\netstandard2.0\System.Security.xml
+D:\Files\.NET\eUseControl.Web\BusinessObject\obj\Debug\netstandard2.0\BusinessObject.csprojAssemblyReference.cache
+D:\Files\.NET\eUseControl.Web\BusinessObject\obj\Debug\netstandard2.0\BusinessObject.AssemblyInfoInputs.cache
+D:\Files\.NET\eUseControl.Web\BusinessObject\obj\Debug\netstandard2.0\BusinessObject.AssemblyInfo.cs
+D:\Files\.NET\eUseControl.Web\BusinessObject\obj\Debug\netstandard2.0\BusinessObject.csproj.CoreCompileInputs.cache
+D:\Files\.NET\eUseControl.Web\BusinessObject\obj\Debug\netstandard2.0\BusinessObject.csproj.CopyComplete
+D:\Files\.NET\eUseControl.Web\BusinessObject\obj\Debug\netstandard2.0\BusinessObject.dll
+D:\Files\.NET\eUseControl.Web\BusinessObject\obj\Debug\netstandard2.0\BusinessObject.pdb
