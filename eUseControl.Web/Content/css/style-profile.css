@@ -11,6 +11,7 @@
      scroll-behavior: smooth;
      box-sizing: border-box;
      font-family: 'Acme', sans-serif;
+     transition: 0;
 }
 
 body {

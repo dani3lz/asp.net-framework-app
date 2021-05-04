@@ -463,6 +463,7 @@
     <Content Include="Views\Auth\Logout.cshtml" />
     <Content Include="Views\Market\Category.cshtml" />
     <Content Include="Views\User\AdminPanel.cshtml" />
+    <Content Include="Views\Market\Book.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -473,6 +474,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Books\img\" />
+    <Folder Include="Content\Books\pdf\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

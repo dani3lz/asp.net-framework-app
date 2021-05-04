@@ -6,9 +6,6 @@ D:\Files\.NET\eUseControl.Web\DataAccess\bin\Debug\netstandard2.0\System.Compone
 D:\Files\.NET\eUseControl.Web\DataAccess\bin\Debug\netstandard2.0\System.Configuration.dll
 D:\Files\.NET\eUseControl.Web\DataAccess\bin\Debug\netstandard2.0\System.Security.dll
 D:\Files\.NET\eUseControl.Web\DataAccess\bin\Debug\netstandard2.0\BusinessObject.pdb
-D:\Files\.NET\eUseControl.Web\DataAccess\bin\Debug\netstandard2.0\System.ComponentModel.DataAnnotations.xml
-D:\Files\.NET\eUseControl.Web\DataAccess\bin\Debug\netstandard2.0\System.Configuration.xml
-D:\Files\.NET\eUseControl.Web\DataAccess\bin\Debug\netstandard2.0\System.Security.xml
 D:\Files\.NET\eUseControl.Web\DataAccess\obj\Debug\netstandard2.0\DataAccess.csprojAssemblyReference.cache
 D:\Files\.NET\eUseControl.Web\DataAccess\obj\Debug\netstandard2.0\DataAccess.AssemblyInfoInputs.cache
 D:\Files\.NET\eUseControl.Web\DataAccess\obj\Debug\netstandard2.0\DataAccess.AssemblyInfo.cs

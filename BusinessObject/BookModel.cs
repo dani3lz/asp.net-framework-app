@@ -28,7 +28,11 @@ namespace BusinessObject
           [BsonElement("img")]
           public string Img { get; set; }
 
+          [BsonElement("pdf")]
+          public string Pdf { get; set; }
+
           [BsonElement("price")]
           public string Price { get; set; }
+          public int len { get; set; }
      }
 }

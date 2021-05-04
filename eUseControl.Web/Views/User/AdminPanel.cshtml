@@ -89,16 +89,27 @@
                                              }
                                         </select>
                                    </div>
-                                   <div class="col-xs-12 label-style">
-                                        <label for="img">Imaginea</label>
-                                        <input type="file" id="ImageFile" name="ImageFile"/>
+                                   <div class="col-xs-6 label-style">
+                                        <label for="img">Imaginea (format jpg)</label>
+                                        <input type="file" id="ImageFile" name="ImageFile" />
+                                   </div>
+                                   <div class="col-xs-6 label-style">
+                                        <label for="pdf">Cartea (format pdf)</label>
+                                        <input type="file" id="PdfFile" name="PdfFile" />
                                    </div>
 
                                    <div class="col-xs-12 label-style">
                                         <br>
                                         <form action="/User/AdminPanel" autocomplete="off" method="post"></form>
                                         <button class="btn btn-lg btn-success pull-right" type="submit" name="btn" value="post">Post</button>
-                                        <label style="font-size:15px; color: red;">@TempData["Error"]</label>
+                                        @if (TempData["Error"] == "Succes!")
+                                        {
+                                             <label style="font-size:15px; color: forestgreen;">@TempData["Error"]</label>
+                                        }
+                                        else
+                                        {
+                                             <label style="font-size:15px; color: red;">@TempData["Error"]</label>
+                                        }
                                    </div>
 
                               }

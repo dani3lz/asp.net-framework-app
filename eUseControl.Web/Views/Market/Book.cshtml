@@ -1,0 +1,101 @@
+﻿@model BusinessObject.BookModel
+
+@{
+     Layout = "~/Views/Shared/_Layout.cshtml";
+     ViewBag.Title = "Market";
+}
+
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <title>Books</title>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+     <link rel="stylesheet" href="~/Content/css/style.css">
+
+</head>
+<body>
+     <div class="wrapper">
+          <div id="header">
+               <div class="logo">BOOKShop</div>
+               <div class="menubar"><a href="/Home/Index">Home</a></div>
+               <div class="menubar" style="color:black !important;"><a href="/Market/Category">Market</a></div>
+               @if (Session["Username"] == null)
+               {
+                    <div class="menubar"><a href="/Auth/Login">Login</a></div>
+               }
+               else
+               {
+                    <div class="dropdown">
+                         <div class="menubar user">@Session["Username"].ToString()</div>
+                         <div class="dropdown-content">
+                              <a href="/User/Profile">Profile</a>
+                              <a href="/Auth/Logout">Logout</a>
+                         </div>
+                    </div>
+               }
+          </div>
+
+          <div class="market">
+               <div class="row books">
+                    @if (Request.QueryString["book"] == Model.Name)
+                    {
+                         <h2 style="margin-top:10px;">@Model.Name / @Model.Autor</h2>
+                         <div class="col-3">
+                              <img draggable="false" src="~/Content/Books/img/@Model.Img" style="width:316px;height:478px; margin-bottom:100px;">
+                         </div>
+                         <div class="col-9">
+
+                              <table class="table table-striped">
+                                   <tbody style="font-size: 25px;">
+                                        <tr>
+                                             <td>Denumirea: </td>
+                                             <td>@Model.Name</td>
+                                        </tr>
+                                        <tr>
+                                             <td>Autorul: </td>
+                                             <td>@Model.Autor</td>
+                                        </tr>
+                                        <tr>
+                                             <td>Categoria: </td>
+                                             <td>@Model.Category</td>
+                                        </tr>
+                                        <tr>
+                                             <td>Pretul: </td>
+                                             <td>@Model.Price MDL</td>
+                                        </tr>
+                                        <tr>
+                                             <td>Versiunea online: </td>
+                                             @if (Session["Username"] != null)
+                                             {
+                                                  <td><a href="~/Content/Books/pdf/@Model.Pdf">PDF</a></td>
+                                             }
+                                             else
+                                             {
+                                                  <td style="color:darkred">Permisiune doar pentru utilizatori! <a href="/Auth/Login">Login</a></td>
+                                             }
+                                        </tr>
+                                   </tbody>
+                              </table>
+
+                         </div>
+                    }
+                    else
+                    {
+                         <h1>Nu exista asa pagina!</h1>
+                    }
+               </div>
+
+          </div>
+          </div>
+
+     <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+     <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
+}

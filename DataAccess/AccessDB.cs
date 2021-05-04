@@ -61,8 +61,8 @@ namespace DataAccess
                     {"name", bk.Name },
                     {"autorul", bk.Autor },
                     {"category", bk.Category },
-                    {"stock", "" },
                     {"img", bk.Img },
+                    {"pdf", bk.Pdf },
                     {"price", bk.Price }
                };
 
@@ -125,7 +125,7 @@ namespace DataAccess
                     {"password", reg.Password },
                     {"first", "" },
                     {"last", "" },
-                    {"adress", "" },
+                    {"address", "" },
                     {"phone", "" },
                     {"class", "user" }
                };
@@ -140,7 +140,7 @@ namespace DataAccess
 
           public (string, int) ChangeProfile(UserProfil changes, string button, string collectionDB)
           {
-               string Error = "";
+               string Error = null;
                int nr = 0;
 
                var client = new MongoClient("mongodb://localhost:27017");
@@ -161,7 +161,7 @@ namespace DataAccess
                          var update1 = Builders<BsonDocument>.Update.Set("first", changes.First);
                          var update2 = Builders<BsonDocument>.Update.Set("last", changes.Last);
                          var update3 = Builders<BsonDocument>.Update.Set("phone", changes.Telefonul);
-                         var update4 = Builders<BsonDocument>.Update.Set("adress", changes.Adresa);
+                         var update4 = Builders<BsonDocument>.Update.Set("address", changes.Adresa);
 
                          users.UpdateOne(filter, update1);
                          users.UpdateOne(filter, update2);

@@ -8,9 +8,6 @@ D:\Files\.NET\eUseControl.Web\BusinessLogic\bin\Debug\netstandard2.0\System.Conf
 D:\Files\.NET\eUseControl.Web\BusinessLogic\bin\Debug\netstandard2.0\System.Security.dll
 D:\Files\.NET\eUseControl.Web\BusinessLogic\bin\Debug\netstandard2.0\BusinessObject.pdb
 D:\Files\.NET\eUseControl.Web\BusinessLogic\bin\Debug\netstandard2.0\DataAccess.pdb
-D:\Files\.NET\eUseControl.Web\BusinessLogic\bin\Debug\netstandard2.0\System.ComponentModel.DataAnnotations.xml
-D:\Files\.NET\eUseControl.Web\BusinessLogic\bin\Debug\netstandard2.0\System.Configuration.xml
-D:\Files\.NET\eUseControl.Web\BusinessLogic\bin\Debug\netstandard2.0\System.Security.xml
 D:\Files\.NET\eUseControl.Web\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.csprojAssemblyReference.cache
 D:\Files\.NET\eUseControl.Web\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.AssemblyInfoInputs.cache
 D:\Files\.NET\eUseControl.Web\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.AssemblyInfo.cs

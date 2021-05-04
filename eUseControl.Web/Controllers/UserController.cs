@@ -35,7 +35,7 @@ namespace eUseControl.Web.Controllers
 
 
           [HttpPost]
-          public ActionResult AdminPanel(ViewModel bk, string btn, string select, HttpPostedFileBase ImageFile)
+          public ActionResult AdminPanel(ViewModel bk, string btn, string select, HttpPostedFileBase ImageFile, HttpPostedFileBase PdfFile)
           {
                if (btn == "post")
                {
@@ -50,13 +50,34 @@ namespace eUseControl.Web.Controllers
                          bk.Book.Category = select;
                          try
                          {
+                              // IMG
                               string filename = Path.GetFileNameWithoutExtension(ImageFile.FileName);
                               string extension = Path.GetExtension(ImageFile.FileName);
+                              if(extension != ".jpg")
+                              {
+                                   TempData["Error"] = "Formatul imaginii trebuie sa fie jpg! / " + extension;
+                                   return RedirectToAction("AdminPanel", "User", new { @option = "addbook" });
+                              }
                               filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
                               bk.Book.Img = filename;
                               string ImagePath = "~/Content/Books/img/" + filename;
                               filename = Path.Combine(Server.MapPath("~/Content/Books/img/"), filename);
                               ImageFile.SaveAs(filename);
+
+                              // PDF
+                              string pdfname = Path.GetFileNameWithoutExtension(PdfFile.FileName);
+                              string pdfextension = Path.GetExtension(PdfFile.FileName);
+                              if(pdfextension != ".pdf")
+                              {
+                                   TempData["Error"] = "Formatul nu este PDF!";
+                                   return RedirectToAction("AdminPanel", "User", new { @option = "addbook" });
+                              }
+
+                              pdfname = pdfname + DateTime.Now.ToString("yymmssfff") + pdfextension;
+                              bk.Book.Pdf = pdfname;
+                              string PdfPath = "~/Content/Books/pdf/" + pdfname;
+                              pdfname = Path.Combine(Server.MapPath("~/Content/Books/pdf/"), pdfname);
+                              PdfFile.SaveAs(pdfname);
                          }
                          catch (Exception)
                          {
@@ -78,20 +99,26 @@ namespace eUseControl.Web.Controllers
           {
                if (Session["Username"] != null)
                {
+                    UserProfil u = new UserProfil();
+                    var result = new UserBL().Connect("Users");
+                    foreach(var r in result)
+                    {
+                         if(r.GetValue("username").ToString() == Session["Username"].ToString())
+                         {
+                              u.Email = r.GetValue("email").ToString();
+                              u.First = r.GetValue("first").ToString();
+                              u.Last = r.GetValue("last").ToString();
+                              u.Adresa = r.GetValue("address").ToString();
+                              u.Telefonul = r.GetValue("phone").ToString();
+                         }
+                    }
                     TempData["Check"] = new UserBL().CheckAdmin(Session["Username"].ToString());
-                    return View();
+                    return View(u);
                }
                else
                {
                     return RedirectToAction("Index", "Home");
                }
-               /*
-                ?????
-               if (Request.UrlReferrer != null && Request.UrlReferrer.PathAndQuery != "/User/Profile" && Request.QueryString["option"] == null)
-               {
-                    return Redirect(Request.UrlReferrer.PathAndQuery);
-               }
-                */
           }
 
           [HttpPost]
@@ -106,24 +133,44 @@ namespace eUseControl.Web.Controllers
                          if (button == "securitymail" || button == "generalinfo" || button == "securitypass")
                          {
                               (string Error, int nr) = new UserBL().ChangeProfile(changes, button, "Users");
-
+                              TempData["Succes"] = null;
                               // Errors
                               if (nr == 0)
                               {
-                                   TempData["ErrorGeneral"] = Error;
-
+                                   if (Error == null)
+                                   {
+                                        TempData["Succes"] = "Modificarile au fost salvate!";
+                                   }
+                                   else
+                                   {
+                                        TempData["ErrorGeneral"] = Error;
+                                   }
                               }
                               else
                               {
                                    if (nr == 1)
                                    {
-                                        TempData["ErrorMail"] = Error;
+                                        if (Error == null)
+                                        {
+                                             TempData["Succes"] = "Modificarile au fost salvate!";
+                                        }
+                                        else
+                                        {
+                                             TempData["ErrorMail"] = Error;
+                                        }
                                    }
                                    else
                                    {
                                         if (nr == 2)
                                         {
-                                             TempData["ErrorPass"] = Error;
+                                             if (Error == null)
+                                             {
+                                                  TempData["Succes"] = "Modificarile au fost salvate!";
+                                             }
+                                             else
+                                             {
+                                                  TempData["ErrorPass"] = Error;
+                                             }
                                         }
                                    }
                               }

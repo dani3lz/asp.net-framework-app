@@ -57,7 +57,7 @@
                     <div class="row nav-panel">
                          <div class="col-sm-3">
                               <!--left col-->
-                              <label for="home">My Profiel</label>
+                              <label for="home">Profilul meu</label>
                               <ul class="list-group nav-list">
                                    <button class="list-group-item nav-obj" name="button" value="home"><strong>Informatii</strong></button>
                               </ul>
@@ -80,15 +80,40 @@
                               @if (Request.QueryString["option"] == "home" || Request.QueryString["option"] == null)
                               {
                                    <div class="tab-content">
-                                        <h1>Home!</h1>
 
-                                   </div><!--/tab-->
+
+                                        <table class="table table-striped">
+                                             <tbody style="font-size: 20px;">
+                                                  <tr>
+                                                       <td>Prenumele: </td>
+                                                       <td>@Model.First</td>
+                                                  </tr>
+                                                  <tr>
+                                                       <td>Numele: </td>
+                                                       <td>@Model.Last</td>
+                                                  </tr>
+                                                  <tr>
+                                                       <td>Email: </td>
+                                                       <td>@Model.Email</td>
+                                                  </tr>
+                                                  <tr>
+                                                       <td>Adresa: </td>
+                                                       <td>@Model.Adresa</td>
+                                                  </tr>
+                                                  <tr>
+                                                       <td>Telefonul: </td>
+                                                       <td>@Model.Telefonul</td>
+                                                  </tr>
+                                             </tbody>
+                                        </table>
+
+                                   </div>
                               }
                               @if (Request.QueryString["option"] == "general")
                               {
 
                                    <div class="col-xs-6 label-style">
-                                        <label for="first_name">First name</label>
+                                        <label for="first_name">Prenumele</label>
 
                                         @Html.EditorFor(model => model.First, new { htmlAttributes = new { @name = "first_name", @class = "form-control", @id = "first_name", @placeholder = "Enter your first name" } })
                                         @Html.ValidationMessageFor(model => model.First, "", new { @class = "danger" })
@@ -96,7 +121,7 @@
 
 
                                    <div class="col-xs-6 label-style">
-                                        <label for="last_name">Last name</label>
+                                        <label for="last_name">Numele</label>
 
                                         @Html.EditorFor(model => model.Last, new { htmlAttributes = new { @name = "last_name", @class = "form-control", @id = "last_name", @placeholder = "Enter your last name" } })
                                         @Html.ValidationMessageFor(model => model.Last, "", new { @class = "danger" })
@@ -104,7 +129,7 @@
 
 
                                    <div class="col-xs-6 label-style">
-                                        <label for="mobile">Mobile</label>
+                                        <label for="mobile">Telefonul</label>
 
                                         @Html.EditorFor(model => model.Telefonul, new { htmlAttributes = new { @name = "mobile", @class = "form-control", @id = "mobile", @placeholder = "Enter your mobile number" } })
                                         @Html.ValidationMessageFor(model => model.Telefonul, "", new { @class = "danger" })
@@ -112,7 +137,7 @@
 
 
                                    <div class="col-xs-6 label-style">
-                                        <label for="location">Location</label>
+                                        <label for="location">Adresa</label>
 
                                         @Html.EditorFor(model => model.Adresa, new { htmlAttributes = new { @class = "form-control", @id = "location", @placeholder = "Enter your location" } })
                                         @Html.ValidationMessageFor(model => model.Adresa, "", new { @class = "danger" })
@@ -122,7 +147,14 @@
                                         <br>
                                         <button class="btn btn-lg btn-success pull-right" type="submit" name="button" value="generalinfo">Save</button>
                                    </div>
-                                   <label class="pull-right" style="font-size:16px; color: darkred;">@TempData["ErrorGeneral"]</label>
+                                   if (TempData["Succes"] == null)
+                                   {
+                                        <label class="pull-right" style="font-size:16px; color: darkred;">@TempData["ErrorGeneral"]</label>
+                                   }
+                                   else
+                                   {
+                                        <label class="pull-right" style="font-size:16px; color: forestgreen;">@TempData["Succes"]</label>
+                                   }
 
                               }
                               @if (Request.QueryString["option"] == "security")
@@ -147,7 +179,14 @@
                                         <br>
                                         <button class="btn btn-lg btn-success pull-right" type="submit" name="button" value="securitymail">Save</button>
                                    </div>
-                                   <label class="pull-right" style="font-size:15px; color: darkred;">@TempData["ErrorMail"]</label>
+                                   if (TempData["Succes"] == null)
+                                   {
+                                        <label class="pull-right" style="font-size:15px; color: darkred;">@TempData["ErrorMail"]</label>
+                                   }
+                                   else
+                                   {
+                                        <label class="pull-right" style="font-size:16px; color: forestgreen;">@TempData["Succes"]</label>
+                                   }
 
                                    <div class="col-xs-12 label-style">
                                         <label for="curentpassword">Parola curenta</label>
@@ -168,7 +207,13 @@
                                         <br>
                                         <button class="btn btn-lg btn-success pull-right" type="submit" name="button" value="securitypass">Save</button>
                                    </div>
+                                   if (TempData["Succes"] == null) { 
                                    <label class="pull-right" style="font-size:15px; color: darkred;">@TempData["ErrorPass"]</label>
+                                   }
+                                   else
+                                   {
+                                        <label class="pull-right" style="font-size:16px; color: forestgreen;">@TempData["Succes"]</label>
+                                   }
                               }
 
                          </div><!--/col-9-->

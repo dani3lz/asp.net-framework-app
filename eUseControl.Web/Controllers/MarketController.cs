@@ -12,7 +12,30 @@ namespace eUseControl.Web.Controllers
 {
      public class MarketController : Controller
      {
+          public ActionResult Book()
+          {
+               int len = 0;
+               var book = Request.QueryString["book"];
+               BookModel u = new BookModel();
+               var result = new UserBL().Connect("Books");
+               foreach(var r in result)
+               {
+                    if(r.GetValue("name").ToString() == book)
+                    {
+                         u.Name = r.GetValue("name").ToString();
+                         u.Price = r.GetValue("price").ToString();
+                         u.Autor = r.GetValue("autorul").ToString();
+                         u.Category = r.GetValue("category").ToString();
+                         u.Img = r.GetValue("img").ToString();
+                         u.Pdf = r.GetValue("pdf").ToString();
+                    }
+                    len++;
+               }
+               u.len = len;
+               return View(u);
+          }
 
+          [HttpGet]
           public ActionResult Books()
           {
                int count = 0;
@@ -21,7 +44,7 @@ namespace eUseControl.Web.Controllers
                var result = new UserBL().Connect("Category");
                foreach (var r in result)
                {
-                    if(r.GetValue("name").ToString() == ctg)
+                    if (r.GetValue("name").ToString() == ctg)
                     {
                          exist = true;
                     }
@@ -34,6 +57,7 @@ namespace eUseControl.Web.Controllers
                     u.Category.Add(ctg);
                     var booksDB = new UserBL().Connect("Books");
                     u.Books = new List<string> { };
+                    u.Autor = new List<string> { };
                     u.Img = new List<string> { };
                     u.Price = new List<string> { };
                     foreach (var r in booksDB)
@@ -41,6 +65,7 @@ namespace eUseControl.Web.Controllers
                          if (r.GetValue("category").ToString() == ctg)
                          {
                               u.Books.Add(r.GetValue("name").ToString());
+                              u.Autor.Add(r.GetValue("autorul").ToString());
                               u.Img.Add(r.GetValue("img").ToString());
                               u.Price.Add(r.GetValue("price").ToString());
                               count++;
@@ -53,6 +78,20 @@ namespace eUseControl.Web.Controllers
                {
                     return RedirectToAction("Index", "Home");
                }
+          }
+
+          [HttpPost]
+          public ActionResult Books(string btn)
+          {
+               var result = new UserBL().Connect("Books");
+               foreach (var r in result)
+               {
+                    if (r.GetValue("name").ToString() == btn)
+                    {
+                         return RedirectToAction("Book", "Market", new { @book = btn });
+                    }
+               }
+               return RedirectToAction("Index", "Home");
           }
 
           [HttpGet]
